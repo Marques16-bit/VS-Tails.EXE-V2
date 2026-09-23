@@ -156,7 +156,7 @@ jobs:
           ndk-version: r21e
 
       - name: Setup Java JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '11'
@@ -191,7 +191,7 @@ jobs:
         run: haxelib run lime build android
 
       - name: Publish Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: androidBuild
           path: export/debug/android/bin/app/build/outputs/apk
