@@ -160,6 +160,8 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: ''
 
       - uses: krdlab/setup-haxe@v2
         with:
@@ -192,3 +194,4 @@ jobs:
         with:
           name: androidBuild
           path: export/debug/android/bin/app/build/outputs/apk
+
