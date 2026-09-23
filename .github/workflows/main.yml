@@ -15,17 +15,13 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   buildLinux:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: krdlab/setup-haxe@master
+      - uses: krdlab/setup-haxe@v2
         with:
           haxe-version: 4.2.5
       # Runs a set of commands using the runners shell
@@ -57,18 +53,18 @@ jobs:
       - name: Compile
         run: haxelib run lime build Project.xml linux --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           name: linuxBuild
           path: 'export/release/linux/bin'
+
   buildWindows:
     runs-on: windows-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2.3.0
+      - uses: actions/checkout@v4
 
-      - uses: krdlab/setup-haxe@master
+      - uses: krdlab/setup-haxe@v2
         with:
           haxe-version: 4.2.5
       # Runs a set of commands using the runners shell
@@ -99,18 +95,18 @@ jobs:
       - name: Compile
         run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           name: windowsBuild
           path: export/release/windows/bin
+
   buildMac:
     runs-on: macos-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: krdlab/setup-haxe@master
+      - uses: krdlab/setup-haxe@v2
         with:
           haxe-version: 4.2.5
       # Runs a set of commands using the runners shell
@@ -140,14 +136,15 @@ jobs:
       - name: Compile
         run: haxelib run lime build mac --app-version="4.0.0-${{ github.run_id}}"
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v4
         with:
           name: macBuild
           path: export/release/macos/bin
+
   buildAndroid:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1
@@ -159,12 +156,12 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '11'
+          java-version: '17'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
 
-      - uses: krdlab/setup-haxe@v1
+      - uses: krdlab/setup-haxe@v2
         with:
           haxe-version: 4.2.5
 
